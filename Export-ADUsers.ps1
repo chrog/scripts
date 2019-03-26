@@ -1,6 +1,6 @@
 ﻿Import-Module ActiveDirectory
 
-$path = 'D:\Export' # ohne Backslash am Ende!
+$path = 'D:\Export'
 $date = Get-Date -UFormat "%d.%m.%Y"
 
 # Get data from Active Directory
