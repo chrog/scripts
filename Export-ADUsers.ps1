@@ -29,7 +29,7 @@ foreach ($klasse in $klassen)
 {
     $tmp = $klasse.Klasse
     $schueler | Where-Object -FilterScript { $_.Klasse -eq $tmp } |
-                ConvertTo-Html -Property Schulart,Klasse,Nachname,Vorname,Benutzername -Title 'Schuelerliste' -PreContent "<h1>Schuelerliste Klasse $tmp ($date)</h1>" |
+                ConvertTo-Html -Property Schulart,Klasse,Nachname,Vorname,Benutzername -Title 'Schuelerliste' -PreContent "<h1>Klassenliste $tmp ($date)</h1>" |
                 ForEach-Object -Process { $_.Replace('<table>','<table border>') } |
                 Out-File -FilePath "$pfad\Export_Schueler_$tmp.html"            
 }
