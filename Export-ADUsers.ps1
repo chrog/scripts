@@ -31,5 +31,5 @@ foreach ($klasse in $klassen)
     $schueler | Where-Object -FilterScript { $_.Klasse -eq $tmp } |
                 ConvertTo-Html -Property Schulart,Klasse,Nachname,Vorname,Benutzername -Title 'Schuelerliste' -PreContent "<h1>Klassenliste $tmp ($date)</h1>" |
                 ForEach-Object -Process { $_.Replace('<table>','<table border>') } |
-                Out-File -FilePath "$pfad\Export_Schueler_$tmp.html"            
+                Out-File -FilePath "$pfad\Export_Klassenliste_$tmp.html"            
 }
