@@ -5,7 +5,7 @@ $students = Get-ADUser -Filter * -SearchBase 'OU=Schueler,OU=Benutzer,DC=musters
 				Where-Object { $_.sAMAccountName -notmatch '^ka\.' -and $_.sAMAccountName -notmatch '^profschueler' }
 $groupStudents = 'G_Schueler'
 
-# Fix the group membership 
+# Fix the group memberships
 $students |
 	ForEach-Object {
 		$groupSchool = 'G_Schueler_' + $_.BusinessCategory[0]
