@@ -4,11 +4,11 @@ $path = 'D:\Export'
 $date = Get-Date -UFormat "%d.%m.%Y"
 
 # Get data from Active Directory
-$teachers = Get-ADUser -Filter {Name -like "*" -and SamAccountName -ne 'proflehrer'} -SearchBase "OU=Lehrer,OU=Benutzer,DC=musterschule,DC=schule,DC=paedml" -Properties Company |
-				Select-Object @{Name="Schulart";Expression={$_.Company}},@{Name="Nachname";Expression={$_.Surname}},@{Name="Vorname";Expression={$_.GivenName}},@{Name="Benutzername";Expression={$_.SamAccountName}} |
+$teachers = Get-ADUser -Filter {Name -like "*" -and sAMAccountName -ne 'proflehrer'} -SearchBase "OU=Lehrer,OU=Benutzer,DC=musterschule,DC=schule,DC=paedml" -Properties Company |
+				Select-Object @{Name="Schulart";Expression={$_.Company}},@{Name="Nachname";Expression={$_.Surname}},@{Name="Vorname";Expression={$_.GivenName}},@{Name="Benutzername";Expression={$_.sAMAccountName}} |
 					Sort-Object Schulart,Nachname,Vorname,Benutzername
-$students = Get-ADUser -Filter {Name -like "*" -and SamAccountName -ne 'profschueler'} -SearchBase "OU=Schueler,OU=Benutzer,DC=musterschule,DC=schule,DC=paedml" -Properties Company,Department |
-				Select-Object @{Name="Schulart";Expression={$_.Company}},@{Name="Klasse";Expression={$_.Department}},@{Name="Nachname";Expression={$_.Surname}},@{Name="Vorname";Expression={$_.GivenName}},@{Name="Benutzername";Expression={$_.SamAccountName}} |
+$students = Get-ADUser -Filter {Name -like "*" -and sAMAccountName -ne 'profschueler'} -SearchBase "OU=Schueler,OU=Benutzer,DC=musterschule,DC=schule,DC=paedml" -Properties Company,Department |
+				Select-Object @{Name="Schulart";Expression={$_.Company}},@{Name="Klasse";Expression={$_.Department}},@{Name="Nachname";Expression={$_.Surname}},@{Name="Vorname";Expression={$_.GivenName}},@{Name="Benutzername";Expression={$_.sAMAccountName}} |
 					Sort-Object Schulart,Klasse,Nachname,Vorname,Benutzername
 
 # Export all teachers/students to csv files
