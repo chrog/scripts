@@ -11,11 +11,11 @@ $students = Get-ADUser -Filter {Name -like "*" -and SamAccountName -ne 'profschu
 				Select-Object @{Name="Schulart";Expression={$_.Company}},@{Name="Klasse";Expression={$_.Department}},@{Name="Nachname";Expression={$_.Surname}},@{Name="Vorname";Expression={$_.GivenName}},@{Name="Benutzername";Expression={$_.SamAccountName}} |
 					Sort-Object Schulart,Klasse,Nachname,Vorname,Benutzername
 
-# Export teachers and students to csv files
+# Export all teachers/students to csv files
 $teachers | ConvertTo-Csv -Delimiter ';' -NoTypeInformation | % { $_ -replace '"', ''} | Set-Content -Encoding UTF8  "$path\Export_Lehrer.txt"
 $students | ConvertTo-Csv -Delimiter ';' -NoTypeInformation | % { $_ -replace '"', ''} | Set-Content -Encoding UTF8  "$path\Export_Schueler.txt"
 
-# Export teachers and students to html files
+# Export all teachers/students to html files
 $teachers | ConvertTo-Html -Property Schulart,Nachname,Vorname,Benutzername -Title 'Lehrerliste' -PreContent "<h1>Lehrerliste ($date)</h1>" |
 				ForEach-Object -Process { $_.Replace('<table>','<table border>') } |
 					Out-File -FilePath "$path\Export_Lehrer.html"
@@ -23,7 +23,7 @@ $students | ConvertTo-Html -Property Schulart,Klasse,Nachname,Vorname,Benutzerna
 				ForEach-Object -Process { $_.Replace('<table>','<table border>') } |
 					Out-File -FilePath "$path\Export_Schueler.html"
 
-# Export classes to html files
+# Export all classes to html files
 $classes = $students | Select-Object Klasse -Unique
 foreach ($class in $classes)
 {
