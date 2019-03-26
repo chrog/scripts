@@ -25,7 +25,7 @@ $schueler | ConvertTo-Html -Property Schulart,Klasse,Nachname,Vorname,Benutzerna
 
 # HTML-Export: Klassen
 $klassen = $schueler | Select-Object Klasse -Unique
-ForEach ($klasse in $klassen)
+foreach ($klasse in $klassen)
 {
     $tmp = $klasse.Klasse
     $schueler | Where-Object -FilterScript { $_.Klasse -eq $tmp } |
