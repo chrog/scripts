@@ -1,9 +1,12 @@
 ﻿Import-Module ActiveDirectory
 
+# Get data from Active Directory
 $students = Get-ADUser -Filter * -SearchBase 'OU=Schueler,OU=Benutzer,DC=musterschule,DC=schule,DC=paedml' -Properties BusinessCategory,Department,DepartmentNumber,memberOf |
 				Where-Object { $_.sAMAccountName -notmatch '^ka\.' -and $_.sAMAccountName -notmatch '^profschueler' }
 $groupStudents = 'G_Schueler'
-$students | 
+
+# Fix the group membership 
+$students |
 	ForEach-Object {
 		$groupSchool = 'G_Schueler_' + $_.BusinessCategory[0]
 		$groupClass = $groupSchool + '_' + $_.Department + '_' + $_.DepartmentNumber[0]
