@@ -21,7 +21,7 @@ foreach ($user in $users){
         # Create an OnMicrosoft email adress
         $bspStr = $user.UserPrincipalName.Split("@")
         $msemail = $bspStr[0] + "@chrognet.onmicrosoft.com"
-        "E-Mail:       " + $msemail
+        "Email:        " + $msemail
         
         # Update azure account source anchor
         Set-MsolUserPrincipalName -UserPrincipalName $user.UserPrincipalName  -NewUserPrincipalName $msemail
